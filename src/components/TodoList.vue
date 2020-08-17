@@ -1,21 +1,13 @@
 <template>
   <div class="total-container">
-    <div class="desktop">
-      <TodoListItem
-        :todos="todos"
-        :fullName="beforeFullName"
-        v-on="$listeners"
-      />
-    </div>
-    <div>
-      <TodoListItem :todos="todos" :fullName="fullName" v-on="$listeners" />
-    </div>
-    <div class="desktop">
-      <TodoListItem
-        :todos="todos"
-        :fullName="afterFullName"
-        v-on="$listeners"
-      />
+    <div
+      :key="index"
+      v-for="(prop, index) in $props"
+      v-show="index !== 'todos'"
+    >
+      <div :class="{ desktop: index !== 'fullName' }">
+        <TodoListItem :todos="todos" :fullName="prop" v-on="$listeners" />
+      </div>
     </div>
   </div>
 </template>
@@ -29,7 +21,7 @@ import { Todos } from "@/types";
   components: {
     TodoListItem,
   },
-  props: ["todos", "fullName", "beforeFullName", "afterFullName"],
+  props: ["todos", "afterFullName", "fullName", "beforeFullName"],
 })
 export default class TodoList extends Vue {
   @Prop() readonly todos!: Todos;

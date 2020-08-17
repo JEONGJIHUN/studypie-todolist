@@ -1,13 +1,9 @@
 <template>
   <header>
-    <div class="desktop">
-      <HeaderItem :date="before" />
-    </div>
-    <div>
-      <HeaderItem :date="now" />
-    </div>
-    <div class="desktop">
-      <HeaderItem :date="after" />
+    <div v-for="(date, index) in $props" :key="index">
+      <div :class="{ desktop: index !== 'now' }">
+        <HeaderItem :date="date" />
+      </div>
     </div>
     <button @click="lastOnClick">←</button>
     <button @click="nextOnClick">→</button>
@@ -22,7 +18,7 @@ import HeaderItem from "@/components/HeaderItem.vue";
   components: {
     HeaderItem,
   },
-  props: ["now", "before", "after"],
+  props: ["after", "now", "before"],
 })
 export default class Header extends Vue {
   @Prop() readonly before!: Date;
@@ -53,11 +49,11 @@ button {
   top: 15px;
   left: 15px;
   border: none;
-  border: 1px solid #aaa;
+  border: 1px solid $default-color;
   border-radius: 4px;
   padding: 2px 4px;
   font-size: $arrow-icon-font-size;
-  color: #aaa;
+  color: $default-color;
   cursor: pointer;
   &:last-child {
     left: auto;
