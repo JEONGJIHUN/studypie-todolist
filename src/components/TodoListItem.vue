@@ -54,11 +54,9 @@ export default class TodoListItem extends Vue {
   }
 
   get todoList() {
-    return this.todos
-      ? this.todos.filter(
-          ({ completed, date }) => !completed && date === this.fullName
-        )
-      : [];
+    return this.todos.filter(
+      ({ completed, date }) => !completed && date === this.fullName
+    );
   }
   get countList() {
     return this.todoList.length;

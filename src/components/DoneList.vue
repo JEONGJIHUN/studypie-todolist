@@ -1,6 +1,6 @@
 <template>
-  <div id="donelist-container" v-show="isOpen">
-    <div id="donelist-title">끝난 일 ({{ countDone }})</div>
+  <div class="donelist-container" v-show="isOpen">
+    <div class="donelist-title">끝난 일 ({{ countDone }})</div>
     <div :key="todo.id" v-for="todo in doneList">
       <Todo :todo="todo" :isDone="isDone" />
     </div>
@@ -26,16 +26,12 @@ export default class DoneList extends Vue {
 
   get doneList() {
     return this.todos
-      ? this.todos
-          .filter(
-            ({ completed, date }) => !!completed && date === this.fullName
-          )
-          .sort(
-            (a, b) =>
-              new Date(b.completedTime).getTime() -
-              new Date(a.completedTime).getTime()
-          )
-      : [];
+      .filter(({ completed, date }) => !!completed && date === this.fullName)
+      .sort(
+        (a, b) =>
+          new Date(b.completedTime).getTime() -
+          new Date(a.completedTime).getTime()
+      );
   }
   get countDone() {
     return this.doneList.length;
@@ -47,10 +43,10 @@ export default class DoneList extends Vue {
 </script>
 
 <style scoped lang="scss">
-#donelist-container {
+.donelist-container {
   margin: 60px 16px 32px;
 }
-#donelist-title {
+.donelist-title {
   font-size: $todo-font-size;
   margin-bottom: 16px;
 }
