@@ -62,9 +62,6 @@ export default class AddItem extends Vue {
 
 <style scoped lang="scss">
 .add-item-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   flex-direction: column;
 }

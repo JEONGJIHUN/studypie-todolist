@@ -24,11 +24,6 @@ $todo-font-size: 17px;
 $button-font-size: 15px;
 
 //common style
-.item-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
 .item {
   outline: none;
   text-align: center;
@@ -37,13 +32,20 @@ $button-font-size: 15px;
   height: 68px;
   border-radius: 12px;
   font-size: 17px;
-  margin: 8px auto;
   border: none;
+  margin-bottom: 8px;
+}
+.todolist-title {
+  width: 327px;
+  font-size: $todo-font-size;
+  margin-bottom: 16px;
 }
 .button-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 327px;
+  margin-top: 8px;
 }
 button ~ button {
   margin-left: 16px;

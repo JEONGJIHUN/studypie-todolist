@@ -18,6 +18,7 @@ export default class Button extends Vue {
 
 <style scoped lang="scss">
 button {
+  padding: 0;
   text-align: center;
   width: 100px;
   height: 44px;

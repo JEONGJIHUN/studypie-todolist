@@ -1,6 +1,6 @@
 <template>
   <div class="donelist-container" v-show="isOpen">
-    <div class="donelist-title">끝난 일 ({{ countDone }})</div>
+    <div class="todolist-title">끝난 일 ({{ countDone }})</div>
     <div :key="todo.id" v-for="todo in doneList">
       <Todo :todo="todo" :isDone="isDone" />
     </div>
@@ -45,9 +45,5 @@ export default class DoneList extends Vue {
 <style scoped lang="scss">
 .donelist-container {
   margin: 60px 16px 32px;
-}
-.donelist-title {
-  font-size: $todo-font-size;
-  margin-bottom: 16px;
 }
 </style>

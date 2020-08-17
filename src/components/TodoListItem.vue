@@ -66,17 +66,14 @@ export default class TodoListItem extends Vue {
 
 <style scoped lang="scss">
 .add-item {
-  margin: 0 auto;
   border: 1px solid $default-color;
+  margin-bottom: 8px;
   cursor: pointer;
 }
 .todolist-container {
-  margin: 32px auto;
-  width: 400px;
-}
-.todolist-title {
-  margin: 0 16px;
-  font-size: $todo-font-size;
-  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 </style>

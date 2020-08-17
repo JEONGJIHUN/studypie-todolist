@@ -1,7 +1,7 @@
 <template>
   <div
-    class="item-container"
     ref="dragItem"
+    class="item-container"
     :id="todo.id"
     :draggable="!isDone"
     @dragstart="startDrag($event, todo.id)"
@@ -9,6 +9,7 @@
     @drag.prevent="moveDrag($event)"
   >
     <div
+      ref="title"
       class="item"
       :class="{ done: isDone, todo: !isDone, clicked: isClicked, edit: isEdit }"
       v-if="!isEdit"
@@ -99,28 +100,35 @@ export default class Todo extends Vue {
   }
   moveDrag(evt: DragEvent) {
     const { pos } = this.swipe;
-    const item = this.$refs.dragItem as HTMLDivElement;
-    const conditionSize = item.clientWidth / 2;
+    const title = this.$refs.title as HTMLDivElement;
+    const conditionSize = title.clientWidth / 2;
     pos.endX = evt.offsetX;
     pos.endY = evt.offsetY;
-    const movementPercent = Math.abs(pos.endX - pos.startX) / conditionSize;
+    const movementPercent = (pos.endX - pos.startX) / conditionSize;
     requestAnimationFrame(() => {
-      item.style.opacity = `${0.8 - movementPercent}`;
+      if (movementPercent < 0) {
+        title.style.opacity = `${1 + movementPercent}`;
+        title.style.backgroundColor = "#5aaafa";
+      } else {
+        title.style.backgroundColor = "#969DAB";
+      }
     });
+    // }
   }
-  endDrag(evt: DragEvent, func?: Function) {
+  endDrag(evt: DragEvent, func: Function) {
     const { pos } = this.swipe;
-    console.log(pos); // TODO: 왜 값이 할당되지 않지?
     const { LEFT, RIGHT } = DIRECTION;
     const { MAX_Y } = LIMIT_BOUNDARY;
     pos.endX = evt.offsetX;
     pos.endY = evt.offsetY;
     const item = this.$refs.dragItem as HTMLDivElement;
-    const conditionSize = item.clientWidth / 2;
+    const title = this.$refs.title as HTMLDivElement;
+    const conditionSize = title.clientWidth / 2;
     const movementPercent = Math.abs(pos.endX - pos.startX) / conditionSize;
-    if (0.8 > movementPercent) {
+    if (1 > movementPercent) {
       requestAnimationFrame(() => {
-        item.style.opacity = "1";
+        title.style.opacity = "1";
+        title.style.backgroundColor = "#5aaafa";
       });
     } else {
       if (pos.endY - pos.startY < MAX_Y) {
@@ -134,7 +142,7 @@ export default class Todo extends Vue {
       //   }
     }
 
-    if (this.swipe.swipeDirection !== "" && typeof func === "function") {
+    if (this.swipe.swipeDirection !== "") {
       func(item.id, this.swipe.swipeDirection);
     }
 
