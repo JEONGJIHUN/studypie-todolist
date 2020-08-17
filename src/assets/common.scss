@@ -1,0 +1,53 @@
+// color
+$input-bgcolor: #081f5c;
+
+$font-color: #ffffff;
+
+$button-bgcolor: #eeeeee;
+$button-color: #007aff;
+
+$default-color: #000000;
+
+$todo-default-bgcolor: #5aaafa;
+$todo-clicked-bgcolor: #007aff;
+$todo-done-bgcolor: #969dab;
+
+$warning: #ff0000;
+
+// size
+$year-font-size: 15px;
+$month-date-font-size: 17px;
+$arrow-icon-font-size: 20px;
+
+$todo-font-size: 17px;
+
+$button-font-size: 15px;
+
+//common style
+.item-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.item {
+  outline: none;
+  text-align: center;
+  line-height: 68px;
+  width: 327px;
+  height: 68px;
+  border-radius: 12px;
+  font-size: 17px;
+  margin: 8px auto;
+  border: none;
+}
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+button ~ button {
+  margin-left: 16px;
+}
+.warning {
+  color: $warning;
+}
