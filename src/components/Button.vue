@@ -9,7 +9,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
   props: ["text"],
 })
 export default class Button extends Vue {
-  @Prop(String) readonly text?: string;
+  @Prop() readonly text!: string;
   onClick() {
     this.$emit("onClick");
   }

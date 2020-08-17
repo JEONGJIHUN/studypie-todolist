@@ -45,10 +45,10 @@ export default class TodoList extends Vue {
   justify-content: space-around;
   margin-top: 60px;
 }
-
 .desktop {
   display: none;
 }
+
 @media screen and (min-width: 1200px) {
   .total-container {
     & > * {

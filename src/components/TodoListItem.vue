@@ -40,7 +40,9 @@ import { Todos } from "@/types";
 export default class TodoListItem extends Vue {
   @Prop() readonly todos!: Todos;
   @Prop() readonly fullName!: string;
+
   isOpen = false;
+
   openOnClick() {
     this.isOpen = !this.isOpen;
   }
@@ -50,6 +52,7 @@ export default class TodoListItem extends Vue {
   setDraggedOver(evt: DragEvent, id: string) {
     this.$emit("setDraggedOver", evt, id);
   }
+
   get todoList() {
     return this.todos
       ? this.todos.filter(

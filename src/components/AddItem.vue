@@ -30,6 +30,7 @@ export default class AddItem extends Vue {
   @Prop() readonly todos!: Todos;
   @Prop() readonly isOpen!: boolean;
   @Prop() readonly fullName!: string;
+
   warning = false;
   value = "";
 

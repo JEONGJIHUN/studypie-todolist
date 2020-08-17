@@ -21,6 +21,7 @@ import { Todos } from "@/types";
 export default class DoneList extends Vue {
   @Prop() readonly todos!: Todos;
   @Prop() readonly fullName!: string;
+
   isDone = true;
 
   get doneList() {

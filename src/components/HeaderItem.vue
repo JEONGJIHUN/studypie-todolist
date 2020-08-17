@@ -13,6 +13,7 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 })
 export default class HeaderItem extends Vue {
   @Prop() readonly date!: Date;
+
   year(d: Date) {
     return d.getFullYear();
   }

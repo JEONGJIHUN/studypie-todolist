@@ -53,6 +53,7 @@ export default class Todo extends Vue {
   @Prop() readonly todo!: ITodo;
   @Prop() readonly isDone!: boolean;
   @Prop() readonly fullName!: string;
+
   value = "";
   isClicked = false;
   isEdit = false;
@@ -76,6 +77,7 @@ export default class Todo extends Vue {
       this.warning = false;
     }
   }
+
   swipeOnHandle(id: string, swipeDirection: string) {
     const { LEFT, RIGHT } = DIRECTION;
     if (swipeDirection === LEFT) {
