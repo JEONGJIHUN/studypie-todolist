@@ -7,6 +7,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
+import { getDay } from "@/utils";
 
 @Component({
   props: ["date"],
@@ -14,34 +15,14 @@ import { Component, Vue, Prop } from "vue-property-decorator";
 export default class HeaderItem extends Vue {
   @Prop() readonly date!: Date;
 
-  year(d: Date) {
+  year(d: Date): number {
     return d.getFullYear();
   }
   monthDateDay(d: Date) {
     const month = d.getMonth() + 1;
     const date = d.getDate();
     const day = d.getDay();
-    return `${month}월 ${date}일 (${this.getDay(day)})`;
-  }
-  getDay(day: number) {
-    switch (day) {
-      case 0:
-        return "일";
-      case 1:
-        return "월";
-      case 2:
-        return "화";
-      case 3:
-        return "수";
-      case 4:
-        return "목";
-      case 5:
-        return "금";
-      case 6:
-        return "토";
-      default:
-        break;
-    }
+    return `${month}월 ${date}일 (${getDay(day)})`;
   }
 }
 </script>

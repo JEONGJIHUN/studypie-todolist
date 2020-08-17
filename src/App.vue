@@ -29,6 +29,7 @@ import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
 import { Todos } from "@/types";
 import { LS_STORE } from "@/constants";
+import { yearMonthDate, moveDate } from "@/utils";
 
 @Component({
   components: {
@@ -60,13 +61,13 @@ export default class App extends Vue {
   draggedOver = "";
 
   get fullName(): string {
-    return this.yearMonthDate(this.now);
+    return yearMonthDate(this.now);
   }
   get beforeFullName(): string {
-    return this.yearMonthDate(this.before);
+    return yearMonthDate(this.before);
   }
   get afterFullName(): string {
-    return this.yearMonthDate(this.after);
+    return yearMonthDate(this.after);
   }
   setLocalStorage(itemName = LS_STORE.DATA, item: number | Todos = this.todos) {
     localStorage.setItem(itemName, JSON.stringify(item));
@@ -96,40 +97,21 @@ export default class App extends Vue {
     this.setLocalStorage();
   }
   setDraggedOver(evt: DragEvent, id: string) {
-    evt.preventDefault();
     if (!evt.dataTransfer) return;
     evt.dataTransfer.effectAllowed = "move";
     this.draggedOver = id;
   }
-  yearMonthDate(d: Date) {
-    const year = d.getFullYear();
-    const month = d.getMonth() + 1;
-    const date = d.getDate();
-    return `${year}.${month}.${date}`;
-  }
   lastOnClick() {
-    const { now, after, before } = this.moveDate(this.now, false);
+    const { now, after, before } = moveDate(this.now, false);
     this.now = now;
     this.after = after;
     this.before = before;
   }
   nextOnClick() {
-    const { now, after, before } = this.moveDate(this.now, true);
+    const { now, after, before } = moveDate(this.now, true);
     this.now = now;
     this.after = after;
     this.before = before;
-  }
-  moveDate(d: Date, forward: boolean) {
-    const oneDay = new Date(d);
-    oneDay.setDate(d.getDate() + (forward ? 1 : -1));
-    const twoDay = new Date(d);
-    twoDay.setDate(d.getDate() + (forward ? 2 : -2));
-    const now = new Date(d);
-    return {
-      now: oneDay,
-      after: forward ? twoDay : now,
-      before: forward ? now : twoDay,
-    };
   }
   fix(title: string, id: string) {
     for (const item of this.todos) {
