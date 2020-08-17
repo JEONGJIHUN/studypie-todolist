@@ -28,6 +28,7 @@ import { Component, Vue } from "vue-property-decorator";
 import Header from "@/components/Header.vue";
 import TodoList from "@/components/TodoList.vue";
 import { Todos } from "@/types";
+import { LS_STORE } from "@/constants";
 
 @Component({
   components: {
@@ -45,10 +46,10 @@ export default class App extends Vue {
     afterDay.setDate(this.now.getDate() + 1);
     this.before = yesterDay;
     this.after = afterDay;
-    const parsedData = JSON.parse(localStorage.getItem("store") || "");
-    const parsedId = JSON.parse(localStorage.getItem("id") || "");
-    this.todos = parsedData || [];
-    this.id = parsedId || 0;
+    const parsedData = JSON.parse(localStorage.getItem(LS_STORE.DATA) || "[]");
+    const parsedId = JSON.parse(localStorage.getItem(LS_STORE.ID) || "0");
+    this.todos = parsedData;
+    this.id = parsedId;
   }
 
   todos: Todos;
@@ -67,13 +68,13 @@ export default class App extends Vue {
   get afterFullName(): string {
     return this.yearMonthDate(this.after);
   }
-  setLocalStorage(itemName = "store", item: number | Todos = this.todos) {
+  setLocalStorage(itemName = LS_STORE.DATA, item: number | Todos = this.todos) {
     localStorage.setItem(itemName, JSON.stringify(item));
   }
   compare(evt: DragEvent) {
     evt.preventDefault();
     if (!evt.dataTransfer) return;
-    const overId = evt.dataTransfer.getData("overId");
+    const overId = evt.dataTransfer.getData("OVER_ID");
     if (!overId) return;
     const overIdItem = this.todos.find(({ id }) => id === overId);
     if (!overIdItem) return;
@@ -147,7 +148,7 @@ export default class App extends Vue {
       completedTime: new Date(),
     };
     this.todos = [...this.todos, todo];
-    this.setLocalStorage("id", this.id);
+    this.setLocalStorage(LS_STORE.ID, this.id);
     this.setLocalStorage();
   }
   remove(id: string) {

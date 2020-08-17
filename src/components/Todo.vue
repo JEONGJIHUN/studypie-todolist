@@ -40,7 +40,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 import Button from "@/components/Button.vue";
-import { DIRECTION, LIMIT_BOUNDARY } from "@/utils";
+import { DIRECTION, LIMIT_BOUNDARY } from "@/constants";
 import { Todo as ITodo } from "@/types";
 
 @Component({
@@ -91,7 +91,7 @@ export default class Todo extends Vue {
   startDrag(evt: DragEvent, id: string) {
     const { pos } = this.swipe;
     if (!evt.dataTransfer) return;
-    evt.dataTransfer.setData("overId", id);
+    evt.dataTransfer.setData("OVER_ID", id);
     pos.startX = evt.offsetX;
     pos.startY = evt.offsetY;
   }
