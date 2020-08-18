@@ -1,4 +1,4 @@
-# study-pie
+# studypie-todolist
 
 ## Project setup
 ```
